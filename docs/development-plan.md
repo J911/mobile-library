@@ -1,3 +1,4 @@
+# Development Plan
 ## **1. 개발 배경**
 스마트폰 사용자가 90% 이상이 된 현재 모바일 세상에 살고있다. 이 사회의 흐름에 따라 학교 도서관의 서비스를 모바일에서도 사용가능하게 개발해보려고 한다.
 
@@ -22,13 +23,13 @@
 #### Class Diagram
 > 상기 작성한 기능을 구현하기 위한 클래스 다이어그램
 <p align="center">
-    <img src="./class-diagram.png" Width="70%" />
+    <img src="./image/class-diagram.png" Width="70%" />
 </p>
 
 #### UI
 > 본 안드로이드 어플리케이션의 계발 예상 화면
 
-![ui](./ui.png)
+![ui](./image/ui.png)
 
 ### 2.2. 설계 과정
 > 본 프로젝트의 설계 과정
