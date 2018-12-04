@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">mobile-library</string>
+    <string name="footer">모바일 도서관 ⓒJ911</string>
 </resources>
