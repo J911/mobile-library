@@ -65,7 +65,11 @@ public class AccountController implements IAccountController {
 
     @Override
     public int signout() {
-        return 0;
+        isLoggedIn = false;
+        accountName = null;
+        accountId = 0;
+        accountIdx = 0;
+        return 200;
     }
 
     @Override

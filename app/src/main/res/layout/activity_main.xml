@@ -34,7 +34,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/request" />
+
         <Button
+            android:id="@+id/signoutBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/signout" />
