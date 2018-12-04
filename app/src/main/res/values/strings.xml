@@ -19,5 +19,6 @@
     <string name="error">error</string>
     <string name="hello">hello</string>
     <string name="successed_signup">successed signup</string>
+    <string name="bad_inputs">bad inputs</string>
 
 </resources>

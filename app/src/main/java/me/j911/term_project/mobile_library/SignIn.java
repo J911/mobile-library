@@ -3,6 +3,7 @@ package me.j911.term_project.mobile_library;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -46,24 +47,30 @@ public class SignIn extends AppCompatActivity {
     }
 
     private void signin() {
-        int id = Integer.parseInt(stdIdInput.getText().toString(), 10);
+        String rawId = stdIdInput.getText().toString();
         String password = stdPwInput.getText().toString();
 
+        if (rawId.equals("") || password.equals("")) {
+            Toast.makeText(getApplicationContext(), R.string.bad_inputs, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        int id = Integer.parseInt(rawId, 10);
         int result = accountController.signin(id, password);
         switch (result) {
             case 200:
-                Toast.makeText(getApplicationContext(),  R.string.hello + " " + accountController.getAccountName(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),  R.string.hello + " " + accountController.getAccountName(), Toast.LENGTH_SHORT).show();
                 Intent mainIntent = new Intent(SignIn.this, MainActivity.class);
                 SignIn.this.startActivity(mainIntent);
                 break;
             case 403:
-                Toast.makeText(getApplicationContext(), R.string.account_no_mached_password, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.account_no_mached_password, Toast.LENGTH_SHORT).show();
                 break;
             case 404:
-                Toast.makeText(getApplicationContext(), R.string.account_not_found, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.account_not_found, Toast.LENGTH_SHORT).show();
                 break;
             default:
-                Toast.makeText(getApplicationContext(), R.string.error, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.error, Toast.LENGTH_SHORT).show();
         }
     }
 }

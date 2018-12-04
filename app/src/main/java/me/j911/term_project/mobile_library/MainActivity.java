@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 accountController.signout();
-                Toast.makeText(getApplicationContext(), R.string.done, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.done, Toast.LENGTH_SHORT).show();
                 MainActivity.this.finish();
             }
         });
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void loggedInCheck() {
         if (!accountController.isLoggedIn()) {
-            Toast.makeText(getApplicationContext(), R.string.login_require, Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), R.string.login_require, Toast.LENGTH_SHORT).show();
             MainActivity.this.finish();
         }
     }
