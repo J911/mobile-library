@@ -39,6 +39,7 @@ public class AccountController implements IAccountController {
         if (!cursor.moveToNext()) return 404;
         String password = cursor.getString(3);
         if (!stdPassword.equals(password)) return 403;
+        isLoggedIn = true;
         return 200;
     }
 
