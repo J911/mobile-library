@@ -67,3 +67,4 @@ fastlane/readme.md
 
 # Custom ignore
 .idea/
+.DS_Store
