@@ -37,7 +37,7 @@ public class AccountController implements IAccountController {
     }
 
     @Override
-    public int signIn(int stdId, String stdPassword) {
+    public int signin(int stdId, String stdPassword) {
         String VALID_CHECK_SQL = "SELECT * FROM ACCOUNT WHERE id = " + stdId + ";";
         Cursor cursor = db.rawQuery(VALID_CHECK_SQL, null);
         if (!cursor.moveToNext()) return 404;
@@ -53,7 +53,7 @@ public class AccountController implements IAccountController {
     }
 
     @Override
-    public int signUp(String stdName, int stdId, String stdPassword) {
+    public int signup(String stdName, int stdId, String stdPassword) {
         String CONFLICT_CHECK_SQL = "SELECT * FROM ACCOUNT WHERE id = " + stdId + ";";
         Cursor cursor = db.rawQuery(CONFLICT_CHECK_SQL, null);
         if (cursor.moveToNext()) return 409;
@@ -64,7 +64,7 @@ public class AccountController implements IAccountController {
     }
 
     @Override
-    public int signOut() {
+    public int signout() {
         return 0;
     }
 
