@@ -52,14 +52,14 @@ public class SignUp extends AppCompatActivity {
         int result = accountController.signup(name, id, password);
         switch (result) {
             case 201:
-                Toast.makeText(getApplicationContext(), "Success Signup", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.successed_signup, Toast.LENGTH_LONG).show();
                 SignUp.this.finish();
                 break;
             case 409:
-                Toast.makeText(getApplicationContext(), "Account Conflict", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.account_conflict, Toast.LENGTH_LONG).show();
                 break;
             default:
-                Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.error, Toast.LENGTH_LONG).show();
         }
     }
 }

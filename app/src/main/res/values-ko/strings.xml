@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">모바일 도서관</string>
+    <string name="footer">모바일 도서관 ⓒJ911</string>
+    <string name="student_id">학번</string>
+    <string name="student_name">이름</string>
+    <string name="student_password">비밀번호</string>
+    <string name="signin">로그인</string>
+    <string name="signup">회원가입</string>
+    <string name="signout">로그아웃</string>
+    <string name="cancle">취소</string>
+    <string name="reserve">자리 예약</string>
+    <string name="request">요청</string>
+    <string name="session">사용자</string>
+    <string name="done">완료</string>
+    <string name="login_require">로그인을 해주세요.</string>
+    <string name="account_conflict">중복된 계정이 존재합니다.</string>
+    <string name="account_not_found">계정을 찾을 수 없습니다.</string>
+    <string name="account_no_mached_password">비밀번호가 일치하지 않습니다.</string>
+    <string name="error">오류</string>
+    <string name="hello">반갑습니다</string>
+    <string name="successed_signup">회원가입 성공</string>
+</resources>

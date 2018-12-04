@@ -52,18 +52,18 @@ public class SignIn extends AppCompatActivity {
         int result = accountController.signin(id, password);
         switch (result) {
             case 200:
-                Toast.makeText(getApplicationContext(), "Hello " + accountController.getAccountName(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),  R.string.hello + " " + accountController.getAccountName(), Toast.LENGTH_LONG).show();
                 Intent mainIntent = new Intent(SignIn.this, MainActivity.class);
                 SignIn.this.startActivity(mainIntent);
                 break;
             case 403:
-                Toast.makeText(getApplicationContext(), "No Matched Password", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.account_no_mached_password, Toast.LENGTH_LONG).show();
                 break;
             case 404:
-                Toast.makeText(getApplicationContext(), "No Matched Account", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.account_not_found, Toast.LENGTH_LONG).show();
                 break;
             default:
-                Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.error, Toast.LENGTH_LONG).show();
         }
     }
 }

@@ -28,7 +28,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="reserve" />
+            android:text="@string/reserve" />
 
         <Button
             android:layout_width="match_parent"
