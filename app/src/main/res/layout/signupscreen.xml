@@ -1,10 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@drawable/background"
+android:gravity="center"
+android:orientation="vertical"
+tools:context=".SignUp">
+
+<LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:background="@drawable/rounded"
+    android:baselineAligned="false"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/signup"
+        android:textAlignment="center"
+        android:textSize="30dp" />
 
     <EditText
         android:id="@+id/JoinStdId"
@@ -26,9 +45,22 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:hint="@string/student_password" />
+
     <Button
         android:id="@+id/JoinSignup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#e96363"
         android:text="@string/signup" />
+
+    <Button
+        android:id="@+id/JoinCancle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#363636"
+        android:layout_marginTop="10dp"
+        android:textColor="#fff"
+        android:text="@string/cancle" />
+
+</LinearLayout>
 </LinearLayout>

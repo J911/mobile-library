@@ -6,4 +6,9 @@
     <string name="student_password">student password</string>
     <string name="signin">signin</string>
     <string name="signup">signup</string>
+    <string name="signout">signout</string>
+    <string name="cancle">cancle</string>
+    <string name="reserve">reserve</string>
+    <string name="request">request</string>
+
 </resources>

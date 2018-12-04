@@ -3,32 +3,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:gravity="center"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".SignIn">
 
-    <EditText
-        android:id="@+id/loginStdIdInput"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="number"
-        android:hint="@string/student_id" />
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/rounded"
+        android:baselineAligned="false"
+        android:orientation="vertical"
+        android:padding="20dp">
 
-    <EditText
-        android:id="@+id/loginStdPwInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:hint="@string/student_password"/>
-    <Button
-        android:id="@+id/loginSigninBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/signin" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/signin"
+            android:textAlignment="center"
+            android:textSize="30dp" />
 
-    <TextView
-        android:id="@+id/loginSignupBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:text="@string/signup" />
+        <EditText
+            android:id="@+id/loginStdIdInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/student_id"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/loginStdPwInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/student_password"
+            android:inputType="textPassword" />
+
+        <Button
+            android:id="@+id/loginSigninBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#e96363"
+            android:text="@string/signin" />
+
+        <TextView
+            android:id="@+id/loginSignupBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:text="@string/signup"
+            android:textAlignment="center" />
+    </LinearLayout>
 </LinearLayout>

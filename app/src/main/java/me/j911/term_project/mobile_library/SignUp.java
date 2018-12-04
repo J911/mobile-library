@@ -16,7 +16,7 @@ public class SignUp extends AppCompatActivity {
     private EditText stdNameInput;
     private EditText stdPwInput;
     private Button signUpButton;
-
+    private Button cancleButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,11 +27,18 @@ public class SignUp extends AppCompatActivity {
         stdNameInput = (EditText) findViewById(R.id.JoinStdName);
         stdPwInput = (EditText) findViewById(R.id.JoinStdPw);
         signUpButton = (Button) findViewById(R.id.JoinSignup);
+        cancleButton = (Button) findViewById(R.id.JoinCancle);
 
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signup();
+            }
+        });
+        cancleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SignUp.this.finish();
             }
         });
 
