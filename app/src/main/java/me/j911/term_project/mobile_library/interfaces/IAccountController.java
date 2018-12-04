@@ -4,5 +4,5 @@ public interface IAccountController {
     public int signIn(int stdId, String stdPassword);
     public int signUp(String stdName, int stdId, String stdPassword);
     public int signOut();
-    public boolean isLoggedin();
+    public boolean isLoggedIn();
 }
