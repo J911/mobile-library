@@ -6,10 +6,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
 
+import me.j911.term_project.mobile_library.entites.Request;
 import me.j911.term_project.mobile_library.helper.DBHelper;
 import me.j911.term_project.mobile_library.interfaces.IRequest;
+import me.j911.term_project.mobile_library.interfaces.IRequestController;
 
-public class RequestController implements IRequest {
+public class RequestController implements IRequestController {
 
     private static RequestController instance;
 
@@ -31,18 +33,34 @@ public class RequestController implements IRequest {
     }
 
     @Override
-    public int getReservedStdId() {
-        return 0;
-    }
-
-    @Override
-    public int getStdLike() {
-        return 0;
-    }
-
-    @Override
-    public boolean addLike() {
+    public boolean addRequest(String seatId, String title, String contents) {
         return false;
+    }
+
+    @Override
+    public boolean isLiked(int requestId) {
+        return false;
+    }
+
+    @Override
+    public boolean like(int requestId) {
+        return false;
+    }
+
+    @Override
+    public boolean unlike(int requestId) {
+        return false;
+    }
+
+    @Override
+    public IRequest getRequestById(int requestId) {
+        return new Request();
+    }
+
+    @Override
+    public IRequest[] getAllRequest() {
+        Request[] requests = new Request[10];
+        return requests;
     }
 
     public static RequestController getInstance(Context context) {
@@ -53,3 +71,5 @@ public class RequestController implements IRequest {
         return instance;
     }
 }
+
+
