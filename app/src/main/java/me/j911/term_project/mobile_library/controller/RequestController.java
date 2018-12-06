@@ -11,6 +11,8 @@ import me.j911.term_project.mobile_library.interfaces.IRequest;
 
 public class RequestController implements IRequest {
 
+    private static RequestController instance;
+
     private DBHelper dbHelper;
     private SQLiteDatabase db;
 
@@ -43,4 +45,11 @@ public class RequestController implements IRequest {
         return false;
     }
 
+    public static RequestController getInstance(Context context) {
+        if (instance == null) {
+            instance = new RequestController(context);
+        }
+
+        return instance;
+    }
 }
