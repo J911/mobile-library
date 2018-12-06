@@ -16,7 +16,7 @@ public class RequestController implements IRequest {
     private DBHelper dbHelper;
     private SQLiteDatabase db;
 
-    public String dbName = "account.db";
+    public String dbName = "request.db";
     public int dbVersion = 1;
     public String tag = "SQLite";
 
