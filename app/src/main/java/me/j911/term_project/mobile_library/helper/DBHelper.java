@@ -16,6 +16,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         this.db = db;
         db.execSQL("CREATE TABLE ACCOUNT (idx INTEGER PRIMARY KEY AUTOINCREMENT, id INTEGER, name TEXT, password TEXT);");
+        db.execSQL("CREATE TABLE REQUEST (idx INTEGER PRIMARY KEY AUTOINCREMENT, account_id INTEGER, title TEXT, contents TEXT, likes INTEGER DEFAULT 0);");
     }
 
     @Override
