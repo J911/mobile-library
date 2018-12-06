@@ -33,8 +33,10 @@ public class RequestController implements IRequestController {
     }
 
     @Override
-    public boolean addRequest(String seatId, String title, String contents) {
-        return false;
+    public boolean addRequest(int stdId, String title, String contents) {
+        String INSERT_REQUEST_SQL = "INSERT INTO REQUEST (account_id, title, contents) VALUES("+stdId+", '"+ title +"', '"+ contents +"');";
+        db.execSQL(INSERT_REQUEST_SQL);
+        return true;
     }
 
     @Override
@@ -54,7 +56,7 @@ public class RequestController implements IRequestController {
 
     @Override
     public IRequest getRequestById(int requestId) {
-        return new Request();
+        return new Request(null, null, 0, 0);
     }
 
     @Override
