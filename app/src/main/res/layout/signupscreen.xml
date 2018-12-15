@@ -60,7 +60,7 @@ tools:context=".SignUp">
         android:background="#363636"
         android:layout_marginTop="10dp"
         android:textColor="#fff"
-        android:text="@string/cancle" />
+        android:text="@string/cancel" />
 
 </LinearLayout>
 </LinearLayout>

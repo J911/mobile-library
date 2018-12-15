@@ -7,7 +7,7 @@
     <string name="signin">로그인</string>
     <string name="signup">회원가입</string>
     <string name="signout">로그아웃</string>
-    <string name="cancle">취소</string>
+    <string name="cancel">취소</string>
     <string name="reserve">자리 예약</string>
     <string name="request">요청</string>
     <string name="session">사용자</string>
@@ -22,4 +22,9 @@
     <string name="bad_inputs">잘못된 입력</string>
     <string name="reserved_seat">예약된 자리</string>
     <string name="reserved_available">예약 가능</string>
+    <string name="empty_seat_msg">빈 자리입니다</string>
+    <string name="no_permission_msg">권한이 없습니다.</string>
+    <string name="cancel_reservation_msg">예약 취소되었습니다.</string>
+    <string name="reserved_msg">이미 예약된 자리입니다.</string>
+    <string name="reserve_msg">예약되었습니다.</string>
 </resources>

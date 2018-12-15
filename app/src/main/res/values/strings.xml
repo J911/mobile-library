@@ -7,7 +7,7 @@
     <string name="signin">signin</string>
     <string name="signup">signup</string>
     <string name="signout">signout</string>
-    <string name="cancle">cancle</string>
+    <string name="cancel">cancel</string>
     <string name="reserve">reserve</string>
     <string name="request">request</string>
     <string name="session">Session</string>
@@ -22,4 +22,9 @@
     <string name="bad_inputs">bad inputs</string>
     <string name="reserved_seat">Reserved Seat</string>
     <string name="reserved_available">Reserved Available</string>
+    <string name="empty_seat_msg">Empty seat</string>
+    <string name="no_permission_msg">No permission</string>
+    <string name="cancel_reservation_msg">canceled reservation</string>
+    <string name="reserved_msg">Already reserved</string>
+    <string name="reserve_msg">reserved seat</string>
 </resources>

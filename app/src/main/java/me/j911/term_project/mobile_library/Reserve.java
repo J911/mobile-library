@@ -76,15 +76,15 @@ public class Reserve extends AppCompatActivity {
         }
         Seat selectedSeat = reserveController.getReservedInfoById(seatId);
         if (!selectedSeat.isReserved()) {
-            Toast.makeText(getApplicationContext(), "빈 자리입니다.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.empty_seat_msg, Toast.LENGTH_SHORT).show();
             return;
         }
         if (selectedSeat.getReservedStdId() != accountController.getAccountId()) {
-            Toast.makeText(getApplicationContext(), "권한이 없습니다.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.no_permission_msg, Toast.LENGTH_SHORT).show();
             return;
         }
         reserveController.unreserveSeat(seatId);
-        Toast.makeText(getApplicationContext(), "예약 취소 되엇습니다.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), R.string.cancel_reservation_msg, Toast.LENGTH_SHORT).show();
         adapter.clear();
         initializeSeat();
     }
@@ -98,11 +98,11 @@ public class Reserve extends AppCompatActivity {
         }
         Seat selectedSeat = reserveController.getReservedInfoById(seatId);
         if (selectedSeat.isReserved()) {
-            Toast.makeText(getApplicationContext(), "이미 예약된 자리입니다.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.reserved_msg, Toast.LENGTH_SHORT).show();
             return;
         }
         reserveController.reserveSeat(seatId, accountController.getAccountId());
-        Toast.makeText(getApplicationContext(), "예약 되엇습니다.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), R.string.reserve_msg, Toast.LENGTH_SHORT).show();
         adapter.clear();
         initializeSeat();
     }
