@@ -26,14 +26,18 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
         <Button
+            android:id="@+id/reserveMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/reserve" />
+            android:text="@string/reserve"
+            android:onClick="move"/>
 
         <Button
+            android:id="@+id/requestMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/request" />
+            android:text="@string/request"
+            android:onClick="move" />
 
         <Button
             android:id="@+id/signoutBtn"

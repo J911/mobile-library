@@ -1,5 +1,6 @@
 package me.j911.term_project.mobile_library;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -35,6 +36,24 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.finish();
             }
         });
+    }
+
+    public void move(View view) {
+        Intent intent;
+        switch (view.getId()) {
+            case R.id.reserveMenu:
+                intent = new Intent(MainActivity.this, Reserve.class);
+                break;
+            case R.id.requestMenu:
+                intent = new Intent(MainActivity.this, Request.class);
+                break;
+            default:
+                Toast.makeText(getApplicationContext(), R.string.error, Toast.LENGTH_SHORT).show();
+                return ;
+        }
+        MainActivity.this.startActivity(intent);
+
+
     }
 
     private void loggedInCheck() {
