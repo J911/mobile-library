@@ -18,10 +18,10 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE ACCOUNT (idx INTEGER PRIMARY KEY AUTOINCREMENT, id INTEGER, name TEXT, password TEXT);");
         db.execSQL("CREATE TABLE REQUEST (idx INTEGER PRIMARY KEY AUTOINCREMENT, account_id INTEGER, title TEXT, contents TEXT, likes INTEGER DEFAULT 0);");
         db.execSQL("CREATE TABLE RESERVE (idx INTEGER PRIMARY KEY AUTOINCREMENT, seat_id TEXT, account_id INTEGER, reserved TINYINT(1) DEFAULT 0);");
-        db.execSQL("INSERT INTO RESERVE (seat_id, account_id) VALUES('A', 20152080)");
-        db.execSQL("INSERT INTO RESERVE (seat_id, account_id, reserved) VALUES('B', 20152080, 1)");
-        db.execSQL("INSERT INTO RESERVE (seat_id, account_id) VALUES('C', 20152080)");
-        db.execSQL("INSERT INTO RESERVE (seat_id, account_id, reserved) VALUES('D', 20152080, 1)");
+        db.execSQL("INSERT INTO RESERVE (seat_id, account_id) VALUES('A-1', 20152080)");
+        db.execSQL("INSERT INTO RESERVE (seat_id, account_id, reserved) VALUES('A-2', 20152080, 1)");
+        db.execSQL("INSERT INTO RESERVE (seat_id, account_id) VALUES('A-3', 20152080)");
+        db.execSQL("INSERT INTO RESERVE (seat_id, account_id, reserved) VALUES('A-4', 20152080, 1)");
     }
 
     @Override

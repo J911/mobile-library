@@ -37,22 +37,22 @@ public class ReserveController implements IReserveController {
     }
 
     @Override
-    public ISeat getReservedInfoById(String seatId) {
+    public Seat getReservedInfoById(String seatId) {
         return null;
     }
 
     @Override
-    public ISeat[] getAllReservedInfo() {
+    public Seat[] getAllReservedInfo() {
         String GET_ALL_RESERVED_INFO = "SELECT * FROM RESERVE";
         Cursor cursor = db.rawQuery(GET_ALL_RESERVED_INFO, null);
-        Seat[] seat = new Seat[cursor.getCount()];
+        Seat[] seats = new Seat[cursor.getCount()];
         while (cursor.moveToNext()) {
             String seatId = cursor.getString(1);
             int accountId = cursor.getInt(2);
             boolean isReserve = cursor.getInt(3) != 0;
-            seat[cursor.getPosition()] = new Seat(seatId, accountId, isReserve);
+            seats[cursor.getPosition()] = new Seat(seatId, accountId, isReserve);
         }
-        return seat;
+        return seats;
     }
 
     @Override
