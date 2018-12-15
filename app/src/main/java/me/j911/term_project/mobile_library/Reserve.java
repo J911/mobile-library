@@ -22,6 +22,7 @@ public class Reserve extends AppCompatActivity {
 
     private ArrayList<String> items;
     private ArrayAdapter adapter;
+    private ListView listview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,7 @@ public class Reserve extends AppCompatActivity {
         loggedInCheck();
         items = new ArrayList<String>();
         adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_single_choice, items);
-        final ListView listview = (ListView) findViewById(R.id.listview) ;
+        listview = (ListView) findViewById(R.id.listview);
         listview.setAdapter(adapter) ;
         initializeSeat();
 
@@ -49,8 +50,10 @@ public class Reserve extends AppCompatActivity {
     public void reserveAction(View view) {
         switch (view.getId()) {
             case R.id.reserveDoit:
+                reserve();
                 break;
             case R.id.reserveCancle:
+                reserveCancle();
                 break;
         }
     }
@@ -62,5 +65,45 @@ public class Reserve extends AppCompatActivity {
             else items.add("["+getString(R.string.reserved_available)+"]: "+ seats[i].getSeatId());
             adapter.notifyDataSetChanged();
         }
+    }
+
+    private void reserveCancle() {
+        int pos = listview.getCheckedItemPosition();
+        String seatId = seats[pos].getSeatId();
+        if (pos == -1) {
+            Toast.makeText(getApplicationContext(), R.string.error, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Seat selectedSeat = reserveController.getReservedInfoById(seatId);
+        if (!selectedSeat.isReserved()) {
+            Toast.makeText(getApplicationContext(), "빈 자리입니다.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (selectedSeat.getReservedStdId() != accountController.getAccountId()) {
+            Toast.makeText(getApplicationContext(), "권한이 없습니다.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        reserveController.unreserveSeat(seatId);
+        Toast.makeText(getApplicationContext(), "예약 취소 되엇습니다.", Toast.LENGTH_SHORT).show();
+        adapter.clear();
+        initializeSeat();
+    }
+
+    private void reserve() {
+        int pos = listview.getCheckedItemPosition();
+        String seatId = seats[pos].getSeatId();
+        if (pos == -1) {
+            Toast.makeText(getApplicationContext(), R.string.error, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Seat selectedSeat = reserveController.getReservedInfoById(seatId);
+        if (selectedSeat.isReserved()) {
+            Toast.makeText(getApplicationContext(), "이미 예약된 자리입니다.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        reserveController.reserveSeat(seatId, accountController.getAccountId());
+        Toast.makeText(getApplicationContext(), "예약 되엇습니다.", Toast.LENGTH_SHORT).show();
+        adapter.clear();
+        initializeSeat();
     }
 }

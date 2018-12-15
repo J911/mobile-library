@@ -33,12 +33,21 @@ public class ReserveController implements IReserveController {
 
     @Override
     public boolean unreserveSeat(String seatId) {
-        return false;
+        String UNRESERVE_SEAT = "UPDATE RESERVE SET reserved = 0 WHERE seat_id = '"+seatId+"'";
+        db.execSQL(UNRESERVE_SEAT);
+        return true;
     }
 
     @Override
     public Seat getReservedInfoById(String seatId) {
-        return null;
+        String GET_ALL_RESERVED = "SELECT * FROM RESERVE WHERE seat_id = '"+seatId+"'";
+        Cursor cursor = db.rawQuery(GET_ALL_RESERVED, null);
+        if (!cursor.moveToNext()) return null;
+        int accountId = cursor.getInt(2);
+        boolean isReserve = cursor.getInt(3) != 0;
+        Seat seat = new Seat(seatId, accountId, isReserve);
+
+        return seat;
     }
 
     @Override
@@ -56,8 +65,10 @@ public class ReserveController implements IReserveController {
     }
 
     @Override
-    public boolean reserveSeat(String seatId) {
-        return false;
+    public boolean reserveSeat(String seatId, int accountId) {
+        String UNRESERVE_SEAT = "UPDATE RESERVE SET reserved = 1, account_id = "+ accountId +" WHERE seat_id = '"+seatId+"'";
+        db.execSQL(UNRESERVE_SEAT);
+        return true;
     }
 
     public static ReserveController getInstance(Context context) {
