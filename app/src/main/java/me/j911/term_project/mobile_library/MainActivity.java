@@ -52,8 +52,6 @@ public class MainActivity extends AppCompatActivity {
                 return ;
         }
         MainActivity.this.startActivity(intent);
-
-
     }
 
     private void loggedInCheck() {
