@@ -58,8 +58,8 @@ public class Reserve extends AppCompatActivity {
     private void initializeSeat() {
         seats = reserveController.getAllReservedInfo();
         for (int i = 0; i < seats.length; i++) {
-            if (seats[i].isReserved()) items.add("[예약된 자리]: " + seats[i].getSeatId());
-            else items.add("[예약 가능]: "+ seats[i].getSeatId());
+            if (seats[i].isReserved()) items.add("["+getString(R.string.reserved_seat) +"]: " + seats[i].getSeatId());
+            else items.add("["+getString(R.string.reserved_available)+"]: "+ seats[i].getSeatId());
             adapter.notifyDataSetChanged();
         }
     }

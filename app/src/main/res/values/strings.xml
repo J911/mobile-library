@@ -20,5 +20,6 @@
     <string name="hello">hello</string>
     <string name="successed_signup">successed signup</string>
     <string name="bad_inputs">bad inputs</string>
-
+    <string name="reserved_seat">Reserved Seat</string>
+    <string name="reserved_available">Reserved Available</string>
 </resources>

@@ -62,6 +62,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setLoginStateText() {
-        loginStateText.setText(R.string.session + ": " + accountController.getAccountName() +"("+accountController.getAccountId()+")");
+        loginStateText.setText(getString(R.string.session) + ": " + accountController.getAccountName() +"("+accountController.getAccountId()+")");
     }
 }

@@ -20,5 +20,6 @@
     <string name="hello">반갑습니다</string>
     <string name="successed_signup">회원가입 성공</string>
     <string name="bad_inputs">잘못된 입력</string>
-
+    <string name="reserved_seat">예약된 자리</string>
+    <string name="reserved_available">예약 가능</string>
 </resources>

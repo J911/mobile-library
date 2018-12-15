@@ -59,7 +59,7 @@ public class SignIn extends AppCompatActivity {
         int result = accountController.signin(id, password);
         switch (result) {
             case 200:
-                Toast.makeText(getApplicationContext(),  R.string.hello + " " + accountController.getAccountName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),  getString(R.string.hello) + " " + accountController.getAccountName(), Toast.LENGTH_SHORT).show();
                 Intent mainIntent = new Intent(SignIn.this, MainActivity.class);
                 SignIn.this.startActivity(mainIntent);
                 break;
