@@ -66,8 +66,8 @@ public class ReserveController implements IReserveController {
 
     @Override
     public boolean reserveSeat(String seatId, int accountId) {
-        String UNRESERVE_SEAT = "UPDATE RESERVE SET reserved = 1, account_id = "+ accountId +" WHERE seat_id = '"+seatId+"'";
-        db.execSQL(UNRESERVE_SEAT);
+        String RESERVE_SEAT = "UPDATE RESERVE SET reserved = 1, account_id = "+ accountId +" WHERE seat_id = '"+seatId+"'";
+        db.execSQL(RESERVE_SEAT);
         return true;
     }
 
