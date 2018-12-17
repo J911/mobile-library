@@ -49,6 +49,14 @@
             android:layout_weight="1"
             android:text="@string/cancel"
             android:onClick="reserveAction" />
+        <Button
+            android:id="@+id/signoutBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/signout"
+            android:onClick="reserveAction" />
+        signoutBtn
 
     </LinearLayout>
 </LinearLayout>

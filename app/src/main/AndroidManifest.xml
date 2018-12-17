@@ -16,10 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
         <activity android:name=".SignIn"></activity>
         <activity android:name=".SignUp"></activity>
-        <activity android:name=".Request"></activity>
         <activity android:name=".Reserve"></activity>
 
     </application>

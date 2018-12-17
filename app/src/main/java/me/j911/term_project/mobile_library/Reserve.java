@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ public class Reserve extends AppCompatActivity {
 
     private AccountController accountController;
     private ReserveController reserveController;
+    private Button signoutBtn;
     private Seat[] seats;
 
     private ArrayList<String> items;
@@ -31,7 +33,15 @@ public class Reserve extends AppCompatActivity {
 
         accountController = AccountController.getInstance(getApplicationContext());
         reserveController = ReserveController.getInstance(getApplicationContext());
-
+        signoutBtn = (Button) findViewById(R.id.signoutBtn);
+        signoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                accountController.signout();
+                Toast.makeText(getApplicationContext(), R.string.done, Toast.LENGTH_SHORT).show();
+                Reserve.this.finish();
+            }
+        });
         loggedInCheck();
         items = new ArrayList<String>();
         adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_single_choice, items);
@@ -41,9 +51,11 @@ public class Reserve extends AppCompatActivity {
 
     }
 
+
     private void loggedInCheck() {
         if (!accountController.isLoggedIn()) {
             Toast.makeText(getApplicationContext(), R.string.login_require, Toast.LENGTH_SHORT).show();
+            Reserve.this.finish();
         }
     }
 
