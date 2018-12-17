@@ -23,6 +23,16 @@
 - **개발 버전:** 28 API(Android)
 - **테스트 장치:** VM(nexus 5)
 
+#### USE
+- List View
+- Adaptor
+- Toast
+- SQLite
+- Intent
+- Permission
+- Interface
+- i13n (다국어 지원)
+
 ### 2.3. 세부 개발 내용
 1. 구조 설계하기
 
@@ -423,8 +433,8 @@ public class Splash extends Activity {
 </LinearLayout>
 ```
 
-#### Signin, SigninScreen
-로그인을 구현하기 위한 화면과 클래스 생성
+#### Signin
+로그인을 구현하기 위한 클래스 생성
 ```java
 package me.j911.term_project.mobile_library;
 
@@ -441,7 +451,7 @@ public class SignIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signinscreen);
 
-        accountController = AccountController.getInstance(getApplicationContext()); // AccountInstance를 초기화
+        accountController = AccountController.getInstance(getApplicationContext()); // AccountController Instance를 초기화
         stdIdInput = (EditText) findViewById(R.id.loginStdIdInput); // xml 바인딩
         stdPwInput = (EditText) findViewById(R.id.loginStdPwInput); // xml 바인딩
         signInButton = (Button) findViewById(R.id.loginSigninBtn); // xml 바인딩
@@ -492,68 +502,301 @@ public class SignIn extends AppCompatActivity {
 }
 
 ```
+#### Signup
+회원가입을 구현하기 위한 클래스 생성
 
-``` xml
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/background"
-    android:gravity="center"
-    android:orientation="vertical"
-    tools:context=".SignIn">
+```java
+package me.j911.term_project.mobile_library;
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/rounded"
-        android:baselineAligned="false"
-        android:orientation="vertical"
-        android:padding="20dp">
+public class SignUp extends AppCompatActivity {
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/signin"
-            android:textAlignment="center"
-            android:textSize="30dp" />
+    private AccountController accountController;// AccountController를 담을 객체 변수 선언
+    private EditText stdIdInput; // 학번을 입력받은 입력창
+    private EditText stdNameInput; // 이름을 입력받을 입력창
+    private EditText stdPwInput; // 비밀번호를 입력받을 입력창
+    private Button signUpButton; // 회원가입 버튼
+    private Button cancleButton; // 취소 버튼
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.signupscreen);
 
-        <EditText
-            android:id="@+id/loginStdIdInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/student_id"
-            android:inputType="number" />
+        accountController = AccountController.getInstance(getApplicationContext()); // AccountController Instance를 초기화
+        stdIdInput = (EditText) findViewById(R.id.JoinStdId); // xml 바인딩
+        stdNameInput = (EditText) findViewById(R.id.JoinStdName); // xml 바인딩
+        stdPwInput = (EditText) findViewById(R.id.JoinStdPw); // xml 바인딩
+        signUpButton = (Button) findViewById(R.id.JoinSignup); // xml 바인딩
+        cancleButton = (Button) findViewById(R.id.JoinCancle); // xml 바인딩
 
-        <EditText
-            android:id="@+id/loginStdPwInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/student_password"
-            android:inputType="textPassword" />
+        signUpButton.setOnClickListener(new View.OnClickListener() { // 회원가입 클릭 이벤트
+            @Override
+            public void onClick(View v) {
+                signup(); // 회원가입 메서드 호출
+            }
+        });
+        cancleButton.setOnClickListener(new View.OnClickListener() { // 취소 클릭 이벤트
+            @Override
+            public void onClick(View v) {
+                SignUp.this.finish(); // 액티비티 종료
+            }
+        });
 
-        <Button
-            android:id="@+id/loginSigninBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#e96363"
-            android:text="@string/signin" />
+    }
 
-        <TextView
-            android:id="@+id/loginSignupBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="20dp"
-            android:text="@string/signup"
-            android:textAlignment="center" />
-    </LinearLayout>
-</LinearLayout>
+    private void signup() { // 회원가입 메서드
+        String rawId = stdIdInput.getText().toString(); // 아이디 불러오기
+        String name = stdNameInput.getText().toString(); // 이름 불러오기
+        String password = stdPwInput.getText().toString(); // 비밀번호 불러오기
+
+        if (rawId.equals("") || name.equals("") || password.equals("")) { // 하나라도 공란이 있다면
+            Toast.makeText(getApplicationContext(), R.string.bad_inputs, Toast.LENGTH_SHORT).show(); // 잘못된 입력 메세지 알림
+            return;
+        }
+
+        int id = Integer.parseInt(rawId, 10); // 아이디 int 형으로 변환
+
+        int result = accountController.signup(name, id, password); // 회원가입
+        switch (result) {
+            case 201: // 성공시
+                Toast.makeText(getApplicationContext(), R.string.successed_signup, Toast.LENGTH_SHORT).show(); // 성공알림
+                SignUp.this.finish(); // 액티비티 종료(뒤로가기)
+                break;
+            case 409: // 중복된 아이디일 시
+                Toast.makeText(getApplicationContext(), R.string.account_conflict, Toast.LENGTH_SHORT).show(); // 중복된 계정 알림
+                break;
+            default: // 기타 오류시
+                Toast.makeText(getApplicationContext(), R.string.error, Toast.LENGTH_SHORT).show(); // 오류 출력
+        }
+    }
+}
 ```
+#### Reserve
+자리 예약 및 취소등의 기능을 사용하기 위한 클래스
+
+```java
+package me.j911.term_project.mobile_library;
+
+public class Reserve extends AppCompatActivity {
+
+    private AccountController accountController; // AccountController를 담을 객체 변수 선언
+    private ReserveController reserveController; // ReserveController를 담을 객체 변수 선언
+    private Button signoutBtn; // 로그아웃 버튼
+    private Seat[] seats; // 자리 정보를 담을 객체 배열 선언
+
+    private ArrayList<String> items; // 리스트를 뿌려줄 리스트 선언
+    private ArrayAdapter adapter; // 리스트 뷰를 연결할 아답터 선언
+    private ListView listview; // 리스트뷰 선언
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.reservescreen);
+
+        accountController = AccountController.getInstance(getApplicationContext()); // AccountController Instance를 초기화
+        reserveController = ReserveController.getInstance(getApplicationContext()); // ReserveController Instance를 초기화
+        signoutBtn = (Button) findViewById(R.id.signoutBtn); // 로그아웃 버튼 바인딩
+        signoutBtn.setOnClickListener(new View.OnClickListener() { // 로그아웃 클릭시
+            @Override
+            public void onClick(View v) {
+                accountController.signout(); // 로그아웃
+                Toast.makeText(getApplicationContext(), R.string.done, Toast.LENGTH_SHORT).show(); // 완료 메시지 알림
+                Reserve.this.finish(); // 액티비티 종료
+            }
+        });
+        loggedInCheck();//로그인 확인 메서트 호출
+        items = new ArrayList<String>(); // 리스트 객체 생성
+        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_single_choice, items); // 어답터 설정
+        listview = (ListView) findViewById(R.id.listview); // 리스트뷰 바인딩
+        listview.setAdapter(adapter) ; // 리스트 뷰 어답터 바인딩
+        initializeSeat(); // 자리 정보 불러오기(초기화)
+
+    }
+
+
+    private void loggedInCheck() { // 로그인 체크 로직
+        if (!accountController.isLoggedIn()) { // 로그인 되어 있지 않다면
+            Toast.makeText(getApplicationContext(), R.string.login_require, Toast.LENGTH_SHORT).show(); // 로그인이 필요하다고 알림
+            Reserve.this.finish(); // 액티비티 종료
+        }
+    }
+
+    public void reserveAction(View view) { // xml 버튼 클릭시
+        switch (view.getId()) {
+            case R.id.reserveDoit: // 예약 하기 클릭시
+                reserve(); // 예약하기 호출
+                break;
+            case R.id.reserveCancle: // 취소하기 클릭시
+                reserveCancle(); // 취소하기 호출
+                break;
+        }
+    }
+
+    private void initializeSeat() { // 자리 초기화 메서드
+        seats = reserveController.getAllReservedInfo(); // 모든 자리 불러와서 seat 에 입력
+        for (int i = 0; i < seats.length; i++) { // 모든 자리를 item에 추가함
+            if (seats[i].isReserved()) items.add("["+getString(R.string.reserved_seat) +"]: " + seats[i].getSeatId());
+            else items.add("["+getString(R.string.reserved_available)+"]: "+ seats[i].getSeatId());
+            adapter.notifyDataSetChanged(); // 아답터에 변화 공지
+        }
+    }
+
+    private void reserveCancle() { // 예약 취소 로직
+        int pos = listview.getCheckedItemPosition(); // 선택된 자리 인덱스 불러오기
+        String seatId = seats[pos].getSeatId(); // 자리의 아이디 가져오기
+        if (pos == -1) { // 클릭한 자리가 없다면
+            Toast.makeText(getApplicationContext(), R.string.error, Toast.LENGTH_SHORT).show(); // 오류 알림
+            return;
+        }
+        Seat selectedSeat = reserveController.getReservedInfoById(seatId); // 선택된 자리의 최신 데이터 다시 불러오기
+        if (!selectedSeat.isReserved()) { // 예약이 안되어있다면
+            Toast.makeText(getApplicationContext(), R.string.empty_seat_msg, Toast.LENGTH_SHORT).show(); // 빈 좌석 이라고 알림
+            return;
+        }
+        if (selectedSeat.getReservedStdId() != accountController.getAccountId()) { // 자신이 예약한 자리가 아니면
+            Toast.makeText(getApplicationContext(), R.string.no_permission_msg, Toast.LENGTH_SHORT).show(); // 권한 없음 알림
+            return;
+        }
+        reserveController.unreserveSeat(seatId); // 자리 취소
+        Toast.makeText(getApplicationContext(), R.string.cancel_reservation_msg, Toast.LENGTH_SHORT).show(); // 성공 알림
+        adapter.clear(); // 아답터 초기화
+        initializeSeat(); // 자리 초기화(갱신)
+    }
+
+    private void reserve() { // 자리 예약하기
+        int pos = listview.getCheckedItemPosition(); // 선택된 자리 인덱스 불러오기
+        String seatId = seats[pos].getSeatId();
+        if (pos == -1) { // 클릭한 자리가 없다면
+            Toast.makeText(getApplicationContext(), R.string.error, Toast.LENGTH_SHORT).show(); // 오류 알림
+            return;
+        }
+        Seat selectedSeat = reserveController.getReservedInfoById(seatId); // 선택된 자리의 최신 데이터 다시 불러오기
+        if (selectedSeat.isReserved()) { // 자리가 이미 예약되어 있다면
+            Toast.makeText(getApplicationContext(), R.string.reserved_msg, Toast.LENGTH_SHORT).show(); // 예약되어 있는 자리라고 알림
+            return;
+        }
+        reserveController.reserveSeat(seatId, accountController.getAccountId()); // 자리 예약
+        Toast.makeText(getApplicationContext(), R.string.reserve_msg, Toast.LENGTH_SHORT).show(); // 성공 알림
+        adapter.clear(); // 아답터 초기화
+        initializeSeat(); // 자리 정보 초기화(갱신)
+    }
+}
+```
+
+#### i13n
+다국어 지원 (en, ko)
+```xml
+<resources>
+    <string name="app_name">mobile library</string>
+    <string name="footer">mobile library ⓒJ911</string>
+    <string name="student_id">student id</string>
+    <string name="student_name">student name</string>
+    <string name="student_password">student password</string>
+    <string name="signin">signin</string>
+    <string name="signup">signup</string>
+    <string name="signout">signout</string>
+    <string name="cancel">cancel</string>
+    <string name="reserve">reserve</string>
+    <string name="request">request</string>
+    <string name="session">Session</string>
+    <string name="done">done</string>
+    <string name="login_require">please signin</string>
+    <string name="account_conflict">account conflict</string>
+    <string name="account_not_found">account not found</string>
+    <string name="account_no_mached_password">no matched password</string>
+    <string name="error">error</string>
+    <string name="hello">hello</string>
+    <string name="successed_signup">successed signup</string>
+    <string name="bad_inputs">bad inputs</string>
+    <string name="reserved_seat">Reserved Seat</string>
+    <string name="reserved_available">Reserved Available</string>
+    <string name="empty_seat_msg">Empty seat</string>
+    <string name="no_permission_msg">No permission</string>
+    <string name="cancel_reservation_msg">canceled reservation</string>
+    <string name="reserved_msg">Already reserved</string>
+    <string name="reserve_msg">reserved seat</string>
+</resources>
+
+```
+```xml
+<resources>
+    <string name="app_name">모바일 도서관</string>
+    <string name="footer">모바일 도서관 ⓒJ911</string>
+    <string name="student_id">학번</string>
+    <string name="student_name">이름</string>
+    <string name="student_password">비밀번호</string>
+    <string name="signin">로그인</string>
+    <string name="signup">회원가입</string>
+    <string name="signout">로그아웃</string>
+    <string name="cancel">취소</string>
+    <string name="reserve">자리 예약</string>
+    <string name="request">요청</string>
+    <string name="session">사용자</string>
+    <string name="done">완료</string>
+    <string name="login_require">로그인을 해주세요.</string>
+    <string name="account_conflict">중복된 계정이 존재합니다.</string>
+    <string name="account_not_found">계정을 찾을 수 없습니다.</string>
+    <string name="account_no_mached_password">비밀번호가 일치하지 않습니다.</string>
+    <string name="error">오류</string>
+    <string name="hello">반갑습니다.</string>
+    <string name="successed_signup">회원가입 성공</string>
+    <string name="bad_inputs">잘못된 입력</string>
+    <string name="reserved_seat">예약된 자리</string>
+    <string name="reserved_available">예약 가능</string>
+    <string name="empty_seat_msg">빈 자리입니다.</string>
+    <string name="no_permission_msg">권한이 없습니다.</string>
+    <string name="cancel_reservation_msg">예약 취소되었습니다.</string>
+    <string name="reserved_msg">이미 예약된 자리입니다.</string>
+    <string name="reserve_msg">예약되었습니다.</string>
+</resources>
+
+```
+
 ### 3.2 실행결과
+<p ALIGN="CENTER">
+<img src="screenshot/splash.png" WIDTH="160px">
+<img src="screenshot/signin.png" WIDTH="160px">
+<img src="screenshot/signup.png" WIDTH="160px">
+<img src="screenshot/main.png" WIDTH="160px">
+</p>
+<p ALIGN="CENTER">(왼쪽 부터 스플래시, 로그인, 회원가입, 자리예약)</p>
+<p ALIGN="CENTER">
+<img src="screenshot/bad-request.png" WIDTH="160px">
+<img src="screenshot/reserve.png" WIDTH="160px">
+<img src="screenshot/unreserve.png" WIDTH="160px">
+<img src="screenshot/icon.png" WIDTH="160px">
+</p>
+<p ALIGN="CENTER">(왼쪽 부터 권한 없음, 예약, 예약 취소, 아이콘)</p>
+
 ### 3.3 디버깅 리포트
+#### 중복된 인스턴스 이슈 
+본 프로젝트에서는 데이터베이스와 연결되는 컨트롤러를 구현하여 시스템을 구현하였다. 
+각 클래스들은 컨트롤러를 호출하여 이용할 수 있는데, 각 클래스마다 새로운 컨트롤러를 호출하는 것은 비효율적일 뿐만 아니라 시스템의 치명적 결함으로 존재할 수 있다.
+
+이런점을 고려하여 싱글톤 패턴을 이용해 컨트롤러를 설계하였다.
+
+```java
+package me.j911.term_project.mobile_library.controller;
+
+public class ReserveController implements IReserveController { // Interface를 구현한다. (참조: me/j911/term-project/mobile-lib/interface)
+    private static ReserveController instance; // 싱글톤 패턴을 구현하기 위한 스태틱 인스턴스 선언
+
+    // (...)
+
+    public ReserveController(Context context) { // ReserveController 생성자
+        // (...)
+    }
+    // (...) 
+
+    public static ReserveController getInstance(Context context) { // 싱글톤을 구현하기 위한 Instance 호출 메서드 
+        if (instance == null) { // 인스턴스가 없으면
+            instance = new ReserveController(context); // 인스턴스 생성
+        }
+        return instance; // 인스턴스 반환
+    }
+}
+
+```
+위와 getInstance()를 호출하여 같이 하나의 인스턴스를 여러 객체가 같이 사용 할 수 있도록 싱글톤 패턴을 사용해 이슈를 해결하였다.
 
 ## **4. 결과물 평가 항목**
 |순번|평가항목|목표|결과|
