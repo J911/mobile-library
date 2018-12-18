@@ -10,6 +10,7 @@
 - 개발자: 이재민 (J911, jaemin.lee.email@gmail.com)
 - 프로젝트 기간: 2018.12.05 ~ 2018.12.18
 - Term Project 계획서:  [https://github.com/J911/mobile-library/blob/master/docs/development-plan.md](./docs/development-plan.md)
+- Term Project 결과 보고서: [https://github.com/J911/mobile-library/blob/master/docs/report.md](./docs/report.md)
 
 - 개발 환경: MacOs
 - 개발 IDE: Android Studio
