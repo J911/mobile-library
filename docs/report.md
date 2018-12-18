@@ -1,4 +1,10 @@
-# Develoment Report
+<p align="center">
+    <img src="../docs/image/banner.png" width="300px" />
+</p>
+
+<h1 align="center">Develoment Report</h1>
+<p align="center">[ANDROID PROGRAMMING] Term Project</p>
+
 ## **1. 개발 배경**
 스마트폰 사용자가 90% 이상이 된 현재 모바일 세상에 살고있다. 이 사회의 흐름에 따라 학교 도서관의 서비스를 모바일에서도 사용가능하게 개발해보려고 한다.
 
