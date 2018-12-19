@@ -37,7 +37,7 @@
 - Intent
 - Permission
 - Interface
-- i13n (다국어 지원)
+- i13n (en-us, ko-kr)
 
 ### 2.3. 세부 개발 내용
 1. 구조 설계하기
